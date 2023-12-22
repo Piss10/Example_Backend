@@ -1,0 +1,1906 @@
+openapi: 3.0.0
+info:
+  title: Api Documentation Backend
+  description:
+  contact:
+    email: hapizdasari@gmail.com
+  version: "1.0"
+servers:
+  - url: https://c2-backend.up.railway.app/api/v1
+    variables: {}
+paths:
+  /register:
+    post:
+      tags:
+        - Users
+      summary: Register For User
+      parameters: []
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            encoding: {}
+            schema:
+              required:
+                - name
+                - email
+                - password
+                - phone
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: "Hapizd"
+                email:
+                  type: string
+                  example: "hapizdasari@gmail.com"
+                password:
+                  type: string
+                  example: "12345"
+                phone:
+                  type: number
+                  example: "0821111111"
+        required: false
+      responses:
+        "200":
+          description: You have successfully created an account
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 1
+                  name:
+                    type: string
+                    example: Hapizd
+                  email:
+                    type: string
+                    example: hapizdasari@gmail.com
+                  password:
+                    type: string
+                    example: 12345
+                  phone:
+                    type: number
+                    example: 0821111111
+                  createdAt:
+                    type: string
+                    example: "2023-06-07T16:07:14.259Z"
+                  updatedAt:
+                    type: string
+                    example: "2023-06-07T16:07:14.259Z"
+        "400":
+          description: Your registration failed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Email and password is required
+                  message1:
+                    type: string
+                    example: Email format is invalid
+                  message2:
+                    type: string
+                    example: Email already Exist
+      deprecated: false
+  /login:
+    post:
+      tags:
+        - Users
+      summary: Login For User
+      parameters: []
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            encoding: {}
+            schema:
+              required:
+                - email
+                - password
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: "hapizdasari@gmail.com"
+                password:
+                  type: string
+                  example: "12345"
+        required: false
+      responses:
+        "200":
+          description: if your login is successful then you will get a token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA0MmM1OTEzLWJhMmItNDY0NS05ZTBjLTRjNWVmNmNiMTQ2NSIsImVtYWlsIjoiaGFwaXpkYXNhcmlAZ21haWwuY29tIiwiY3JlYXRlZEF0IjoiMjAyMy0wNi0wN1QxNjowNzoxNC4yNTlaIiwidXBkYXRlZEF0IjoiMjAyMy0wNi0wN1QxNjowNzoxNC4yNTlaIiwiaWF0IjoxNjg2MTU0MzA5fQ.bbmJePbn5QHoaCIJAB7l0j5PIQvoIYEBEkfES6vh67g
+                  name:
+                    type: string
+                    example: Hapizd
+                  createdAt:
+                    type: string
+                    example: "2023-06-07T16:07:14.259Z"
+                  updatedAt:
+                    type: string
+                    example: "2023-06-07T16:07:14.259Z"
+        "400":
+          description: if you write wrong email that has been registered
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Email Not Found
+        "401":
+          description: If you write the wrong password registered in your email
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: wrong password!
+      deprecated: false
+  /users:
+    get:
+      tags:
+        - Users
+      summary: Get All Users
+      parameters: []
+      responses:
+        "200":
+          description: This is the data of all users
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Get All Data User Success
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        name:
+                          type: string
+                        email:
+                          type: string
+                        password:
+                          type: string
+                        phone:
+                          type: number
+                        verified:
+                          type: string
+                        image_profile:
+                          type: string
+                        createdAt:
+                          type: string
+                        updatedAt:
+                          type: string
+                    example:
+                      - id: 1
+                        name: Hapizd
+                        email: hapizdasari@gmail.com
+                        password: "12345"
+                        phone: "0821111111"
+                        verified: false
+                        image_profile: https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png
+                        createdAt: "2023-06-07T16:16:46.530Z"
+                        updatedAt: "2023-06-07T16:16:46.530Z"
+                      - id: 2
+                        name: Teuku
+                        email: teukudr@gmail.com
+                        password: "12345"
+                        phone: "08200000"
+                        verified: false
+                        image_profile: https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png
+                        createdAt: "2023-06-07T16:16:46.530Z"
+                        updatedAt: "2023-06-07T16:16:46.530Z"
+                      - id: 3
+                        name: Taofik
+                        email: taofik@gmail.com
+                        password: "12345"
+                        phone: "082777777"
+                        verified: false
+                        image_profile: https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png
+                        createdAt: "2023-06-07T16:23:42.079Z"
+                        updatedAt: "2023-06-07T16:23:42.079Z"
+        "404":
+          description: If Data Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Data not found
+        "500":
+          description: If the server is down or full
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Server error
+      deprecated: false
+    put:
+      tags:
+        - Users
+      summary: Edit User Profile With Token
+      parameters:
+        - name: token
+          in: path
+          schema:
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            encoding: {}
+            schema:
+              required:
+                - name
+                - phone
+                - email
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: Hapizd
+                phone:
+                  type: number
+                  example: 08222222222
+                email:
+                  type: string
+                  example: "hapizdasari@gmail.com"
+        required: false
+      responses:
+        "200":
+          description: If Update Data User Successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  message:
+                    type: string
+                    example: Update Data User Successfully
+          headers: {}
+        "422":
+          description: If token not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: Token not found
+
+          headers: {}
+      deprecated: false
+  /verify-user:
+    put:
+      tags:
+        - Users
+      summary: Verify User With OTP
+      parameters:
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            encoding: {}
+            schema:
+              required:
+                - OTP
+              type: object
+              properties:
+                OTP:
+                  type: number
+                  example: 678345
+      responses:
+        "200":
+          description: If User verified successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  message:
+                    type: string
+                    example: User verified successfully
+          headers: {}
+        "400":
+          description: If Token not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: Token not found
+          headers: {}
+      deprecated: false
+  /users/:id:
+    get:
+      tags:
+        - Users
+      summary: Get User ById
+      parameters: []
+      responses:
+        "200":
+          description: If all data is retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: OK
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: uuid
+                      name:
+                        type: string
+                      email:
+                        type: string
+                      password:
+                        type: string
+                      phone:
+                        type: number
+                      verified:
+                        type: string
+                      image_profile:
+                        type: string
+                      createdAt:
+                        type: string
+                      updatedAt:
+                        type: string
+                    example:
+                      - id: 1
+                        name: Hapizd
+                        email: hapizdasari@gmail.com
+                        password: "12345"
+                        phone: "0821111111"
+                        verified: false
+                        image_profile: https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png
+                        createdAt: "2023-06-07T16:16:46.530Z"
+                        updatedAt: "2023-06-07T16:16:46.530Z"
+        "404":
+          description: If Data not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Data not found
+        "500":
+          description: If the server is down or full
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Server Error
+      deprecated: false
+
+  /forget-password:
+    post:
+      tags:
+        - Users
+      summary: Forgot User Password
+      parameters:
+        require: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            encoding: {}
+            schema:
+              required:
+                - Email
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: jamal@gmail.com
+        required: false
+      responses:
+        "200":
+          description: Resets Password Successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  message:
+                    type: string
+                    example: Update Password Success
+          headers: {}
+        "400":
+          description: If email not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Email not found
+          headers: {}
+  /reset-password:
+    put:
+      tags:
+        - Users
+      summary: Reset User Password With Token
+      parameters:
+        - name: token
+          in: path
+          require: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            encoding: {}
+            schema:
+              required:
+                - Password
+                - ConfirmPassword
+              type: object
+              properties:
+                password:
+                  type: string
+                  example: kurakura
+                confirmPassword:
+                  type: string
+                  example: kurakura
+        required: false
+      responses:
+        "200":
+          description: Resets Password Successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  message:
+                    type: string
+                    example: Update Password Success
+          headers: {}
+        "500":
+          description: If the server is down or full
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Server Error
+          headers: {}
+      deprecated: false
+  /tickets:
+    get:
+      tags:
+        - Tickets
+      summary: Get All Tickets
+      parameters: []
+      responses:
+        "200":
+          description: If Data Ticket successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  message:
+                    type: string
+                    example: Get All Data Ticket Success
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: uuid
+                        city_from:
+                          type: string
+                        city_to:
+                          type: string
+                        airlines:
+                          type: string
+                        code:
+                          type: string
+                        airport_from:
+                          type: string
+                        airport_to:
+                          type: string
+                        information:
+                          type: string
+                        dateTakeoff:
+                          type: date
+                        dateLanding:
+                          type: date
+                        dateDeparture:
+                          type: date
+                        dateReturn:
+                          type: date
+                        dateEnd:
+                          type: date
+                        type_seat:
+                          type: string
+                        price:
+                          type: integer
+                        booking_kode:
+                          type: string
+                        available:
+                          type: boolean
+                        createdAt:
+                          type: string
+                        updatedAt:
+                          type: string
+                    example:
+                      - id: 1
+                        city_from: "Jakarta"
+                        city_to: "Singapore"
+                        airlines: "Lion Air"
+                        code: "JT-456"
+                        airport_from: "Soekarno-Hatta International"
+                        airport_to: "Singapore Changi"
+                        information: "Baggage 20 kg Cabin baggage 7 kg In Flight Entertainment"
+                        dateTakeoff: "07:55"
+                        dateLanding: "10:45"
+                        dateDeparture: "2023-06-19"
+                        dateReturn: "2023-06-19"
+                        dateEnd: "2023-06-19"
+                        type_seat: "Economy"
+                        price: 994000
+                        booking_code: "8vyb7rq8mp"
+                        available: true
+                        createdAt: "2023-06-13T16:13:06.899Z"
+                        updatedAt: "2023-06-13T16:13:06.899Z"
+        "404":
+          description: If No tickets found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: No tickets found
+    post:
+      tags:
+        - Tickets
+      summary: Create Ticket
+      parameters: []
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            encoding: {}
+            schema:
+              required:
+                - city_from
+                - city_to
+                - airlines
+                - airport_from
+                - airport_to
+                - dateDeparture
+                - dateReturn
+                - dateEnd
+                - type_seat
+                - price
+                - booking_code
+                - available
+              type: object
+              properties:
+                city_from:
+                  type: string
+                  example: Jakarta
+                city_to:
+                  type: string
+                  example: Singapore
+                airlines:
+                  type: string
+                  example: Lion Air
+                airport_from:
+                  type: string
+                  example: Soekarno-Hatta International
+                airport_to:
+                  type: string
+                  example: Singapore Changi
+                dateDeparture:
+                  type: date
+                  example: 2023-06-19
+                dateReturn:
+                  type: date
+                  example: 2023-06-19
+                dateEnd:
+                  type: date
+                  example: 2023-06-19
+                type_seat:
+                  type: string
+                  example: 2023-06-19
+                price:
+                  type: integer
+                  example: 994000
+                booking_code:
+                  type: string
+                  example: k1jox1lmrg
+                available:
+                  type: boolean
+                  example: true
+        required: false
+      responses:
+        "201":
+          description: If Created Ticket Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Created Ticket Success
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: uuid
+                        city_from:
+                          type: string
+                        city_to:
+                          type: string
+                        airlines:
+                          type: string
+                        airport_from:
+                          type: string
+                        airport_to:
+                          type: string
+                        information:
+                          type: string
+                        dateDeparture:
+                          type: date
+                        dateReturn:
+                          type: date
+                        dateEnd:
+                          type: date
+                        type_seat:
+                          type: string
+                        total_passenger:
+                          type: integer
+                        price:
+                          type: integer
+                        booking_kode:
+                          type: string
+                        available:
+                          type: boolean
+                        createdAt:
+                          type: string
+                        updatedAt:
+                          type: string
+                    example:
+                      - id: 1
+                        city_from: "Jakarta"
+                        city_to: "Singapore"
+                        airlines: "Lion Air"
+                        airport_from: "Soekarno-Hatta International"
+                        airport_to: "Singapore Changi"
+                        information: "Baggage 20 kg Cabin baggage 7 kg In Flight Entertainment"
+                        dateDeparture: "2023-06-19"
+                        dateReturn: "2023-06-19"
+                        dateEnd: "2023-06-19"
+                        type_seat: "Economy"
+                        price: 994000
+                        booking_code: "8vyb7rq8mp"
+                        available: true
+                        createdAt: "2023-06-13T16:13:06.899Z"
+                        updatedAt: "2023-06-13T16:13:06.899Z"
+        "400":
+          description: If Data not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Data not found
+      deprecated: false
+  /tickets/:id:
+    get:
+      tags:
+        - Tickets
+      summary: Get Ticket Byid
+      parameters: []
+      responses:
+        "200":
+          description: If Data Ticket successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  message:
+                    type: string
+                    example: Get All Data Ticket Success
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: uuid
+                        city_from:
+                          type: string
+                        city_to:
+                          type: string
+                        airlines:
+                          type: string
+                        code:
+                          type: string
+                        airport_from:
+                          type: string
+                        airport_to:
+                          type: string
+                        information:
+                          type: string
+                        dateTakeoff:
+                          type: date
+                        dateLanding:
+                          type: date
+                        dateDeparture:
+                          type: date
+                        dateReturn:
+                          type: date
+                        dateEnd:
+                          type: date
+                        type_seat:
+                          type: string
+                        price:
+                          type: integer
+                        booking_kode:
+                          type: string
+                        available:
+                          type: boolean
+                        createdAt:
+                          type: string
+                        updatedAt:
+                          type: string
+                    example:
+                      - id: 1
+                        city_from: "Jakarta"
+                        city_to: "Singapore"
+                        airlines: "Lion Air"
+                        code: "JT-456"
+                        airport_from: "Soekarno-Hatta International"
+                        airport_to: "Singapore Changi"
+                        information: "Baggage 20 kg Cabin baggage 7 kg In Flight Entertainment"
+                        dateTakeoff: "07:55"
+                        dateLanding: "10:45"
+                        dateDeparture: "2023-06-19"
+                        dateReturn: "2023-06-19"
+                        dateEnd: "2023-06-19"
+                        type_seat: "Economy"
+                        price: 994000
+                        booking_code: "8vyb7rq8mp"
+                        available: true
+                        createdAt: "2023-06-13T16:13:06.899Z"
+                        updatedAt: "2023-06-13T16:13:06.899Z"
+        "404":
+          description: If No tickets found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: No tickets found
+  /tickets?city_from=jakarta&type_seat=economy&city_to=singapore&dateDepature=2023-06-19:
+    get:
+      tags:
+        - Tickets
+      summary: Get Ticket By query
+      parameters: []
+      responses:
+        "200":
+          description: If data successfully retrived
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  message:
+                    type: string
+                    example: Get All Data Ticket Success
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: uuid
+                        city_from:
+                          type: string
+                        city_to:
+                          type: string
+                        airlines:
+                          type: string
+                        airport_from:
+                          type: string
+                        airport_to:
+                          type: string
+                        information:
+                          type: string
+                        dateTakeoff:
+                          type: date
+                        dateLanding:
+                          type: date
+                        dateDeparture:
+                          type: date
+                        dateReturn:
+                          type: date
+                        dateEnd:
+                          type: date
+                        type_seat:
+                          type: string
+                        total_passenger:
+                          type: integer
+                        price:
+                          type: integer
+                        booking_kode:
+                          type: string
+                        available:
+                          type: boolean
+                        createdAt:
+                          type: string
+                        updatedAt:
+                          type: string
+                    example:
+                      - id: 1
+                        city_from: "Jakarta"
+                        city_to: "Singapore"
+                        airlines: "Lion Air"
+                        code: "JT-547"
+                        airport_from: "Soekarno-Hatta International"
+                        airport_to: "Singapore Changi"
+                        information: "Baggage 20 kg Cabin baggage 7 kg In Flight Entertainment"
+                        dateTakeoff: "07:55"
+                        dateLanding: "10:45"
+                        dateDeparture: "2023-06-19"
+                        dateReturn: "2023-06-19"
+                        dateEnd: "2023-06-19"
+                        type_seat: "Economy"
+                        price: 994000
+                        booking_code: "8vyb7rq8mp"
+                        available: true
+                        createdAt: "2023-06-13T16:13:06.899Z"
+                        updatedAt: "2023-06-13T16:13:06.899Z"
+
+  /checkout:
+    get:
+      tags:
+        - Checkout
+      summary: Get All Checkout With Token
+      parameters:
+        - name: token
+          in: path
+          schema:
+      responses:
+        "200":
+          description: If data successfully retrived
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  message:
+                    type: string
+                    example: Get All Data Checkout Success
+                  data:
+                    type: array
+                    items:
+                      type: object
+                    properties:
+                    example:
+                      - id: "03bb8d98-213e-4077-abf5-4332c1bfa2be"
+                        usersId: "59c414a7-e3e2-4005-afcd-7982e224e540"
+                        departureTicketsId: "a30c37d1-7700-40bb-ba37-c218a4cc17de"
+                        returnTicketsId: "86da83ae-3e0a-4d8d-baf1-ca49cbcad1cd"
+                        total_passenger: 2
+                        createdAt: "2023-06-14T15:29:28.482Z"
+                        updatedAt: "2023-06-14T15:29:28.482Z"
+                        departureTicket:
+                          id: "a30c37d1-7700-40bb-ba37-c218a4cc17de"
+                          city_from: "Jakarta"
+                          city_to: "Medan"
+                          airlines: "Super Air Jet"
+                          code: "IU-454"
+                          airport_from: "Soekarno-Hatta International"
+                          airport_to: "Bandar Udara Internasional Kualanamu"
+                          information: "Baggage 20 kg Cabin baggage 7 kg In Flight Entertainment"
+                          dateTakeoff: "06:45"
+                          dateLanding: "09:05"
+                          dateDeparture: "2023-06-20"
+                          dateEnd: "2023-06-20"
+                          dateReturn: "2023-06-21"
+                          type_seat: "Economy"
+                          price: 891800
+                          booking_code: "ptzc5c9ala"
+                          available: true,
+                          createdAt: "2023-06-22T15:45:51.601Z"
+                          updatedAt: "2023-06-22T15:45:51.601Z"
+                        returnTicket:
+                          id: "86da83ae-3e0a-4d8d-baf1-ca49cbcad1cd"
+                          city_from: "Medan"
+                          city_to: "Jakarta"
+                          airlines: "Super Air Jet"
+                          code: "IU-454"
+                          airport_from: "Soekarno-Hatta International"
+                          airport_to: "Bandar Udara Internasional Kualanamu"
+                          information: "Baggage 20 kg Cabin baggage 7 kg In Flight Entertainment"
+                          dateTakeoff: "06:45"
+                          dateLanding: "09:05"
+                          dateDeparture: "2023-06-20"
+                          dateEnd: "2023-06-20"
+                          dateReturn: "2023-06-21"
+                          type_seat: "Economy"
+                          price: 891800
+                          booking_code: "ptzc5c9ala"
+                          available: true,
+                          createdAt: "2023-06-22T15:45:51.601Z"
+                          updatedAt: "2023-06-22T15:45:51.601Z"
+                        total_price: 5539940
+                        passengers:
+                          - id: "8cc64a65-b234-4745-bb60-925aba9c95ca"
+                            checkoutsId: "03bb8d98-213e-4077-abf5-4332c1bfa2be"
+                            departureTicketsId: "a30c37d1-7700-40bb-ba37-c218a4cc17de"
+                            returnTicketsId: "86da83ae-3e0a-4d8d-baf1-ca49cbcad1cd"
+                            name: "fikar"
+                            email: "fikar@gmail.com"
+                            phone: "67890"
+                            familyName: "fikarfamily"
+                            title: "Mr"
+                            dateofbirth: null
+                            citizenship: null
+                            ktppaspor: null
+                            issuingcountry: null
+                            expirationdatepass: null
+                            createdAt: "2023-06-22T15:47:31.588Z"
+                            updatedAt: "2023-06-22T15:47:31.588Z"
+                          - id: "d353c788-3891-45d2-9f9d-be1ee74509a9"
+                            checkoutsId: "03bb8d98-213e-4077-abf5-4332c1bfa2be"
+                            ticketsId: "e051939f-6378-4514-abf3-63c79ca8f85f"
+                            name: "mata"
+                            email: "mata@gmail.com"
+                            phone: "12345"
+                            familyName: "matafamily"
+                            title: "Mr"
+                            dateofbirth: null
+                            citizenship: null
+                            ktppaspor: null
+                            issuingcountry: null
+                            expirationdatepass: null
+                            createdAt: "2023-06-22T15:47:31.588Z"
+                            updatedAt: "2023-06-22T15:47:31.588Z"
+    post:
+      tags:
+        - Checkout
+      summary: One Way & Two Way
+      description: ""
+      operationId: addPet
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: token
+          in: path
+        - in: body
+          name: TwoWay
+          summary: Two Way
+          required: true
+          schema:
+            $ref: "#/definitions/Tickettwoway"
+        - in: body
+          name: OneWay
+          required: true
+          summary: One Way
+          schema:
+            $ref: "#/definitions/Ticketoneway"
+      responses:
+        "201":
+          description: Checkout created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  message:
+                    type: string
+                    example: Checkout created successfully
+        "400":
+          description: If Invalid ticketsId, Ticket does not exist
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Invalid ticketsId, Ticket does not exist
+        "500":
+          description: If the server is down or error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Server Error
+  /checkout/:id:
+    get:
+      tags:
+        - Checkout
+      summary: Get All Checkout With Id
+      parameters:
+        - name: Id
+          in: path
+          schema:
+      responses:
+        "200":
+          description: If data successfully retrived
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  message:
+                    type: string
+                    example: Checkout Data Retrieved Successfully
+                  data:
+                    type: array
+                    items:
+                      type: object
+                    properties:
+                    example:
+                      - id: "03bb8d98-213e-4077-abf5-4332c1bfa2be"
+                        usersId: "59c414a7-e3e2-4005-afcd-7982e224e540"
+                        departureTicketsId: "a30c37d1-7700-40bb-ba37-c218a4cc17de"
+                        returnTicketsId: "86da83ae-3e0a-4d8d-baf1-ca49cbcad1cd"
+                        total_passenger: 2
+                        createdAt: "2023-06-14T15:29:28.482Z"
+                        updatedAt: "2023-06-14T15:29:28.482Z"
+                        departureTicket:
+                          id: "a30c37d1-7700-40bb-ba37-c218a4cc17de"
+                          city_from: "Jakarta"
+                          city_to: "Medan"
+                          airlines: "Super Air Jet"
+                          code: "IU-454"
+                          airport_from: "Soekarno-Hatta International"
+                          airport_to: "Bandar Udara Internasional Kualanamu"
+                          information: "Baggage 20 kg Cabin baggage 7 kg In Flight Entertainment"
+                          dateTakeoff: "06:45"
+                          dateLanding: "09:05"
+                          dateDeparture: "2023-06-20"
+                          dateEnd: "2023-06-20"
+                          dateReturn: "2023-06-21"
+                          type_seat: "Economy"
+                          price: 891800
+                          booking_code: "ptzc5c9ala"
+                          available: true,
+                          createdAt: "2023-06-22T15:45:51.601Z"
+                          updatedAt: "2023-06-22T15:45:51.601Z"
+                        returnTicket:
+                          id: "86da83ae-3e0a-4d8d-baf1-ca49cbcad1cd"
+                          city_from: "Medan"
+                          city_to: "Jakarta"
+                          airlines: "Super Air Jet"
+                          code: "IU-454"
+                          airport_from: "Soekarno-Hatta International"
+                          airport_to: "Bandar Udara Internasional Kualanamu"
+                          information: "Baggage 20 kg Cabin baggage 7 kg In Flight Entertainment"
+                          dateTakeoff: "06:45"
+                          dateLanding: "09:05"
+                          dateDeparture: "2023-06-20"
+                          dateEnd: "2023-06-20"
+                          dateReturn: "2023-06-21"
+                          type_seat: "Economy"
+                          price: 891800
+                          booking_code: "ptzc5c9ala"
+                          available: true,
+                          createdAt: "2023-06-22T15:45:51.601Z"
+                          updatedAt: "2023-06-22T15:45:51.601Z"
+                        total_price: 5539940
+                        passengers:
+                          - id: "8cc64a65-b234-4745-bb60-925aba9c95ca"
+                            checkoutsId: "03bb8d98-213e-4077-abf5-4332c1bfa2be"
+                            departureTicketsId: "a30c37d1-7700-40bb-ba37-c218a4cc17de"
+                            returnTicketsId: "86da83ae-3e0a-4d8d-baf1-ca49cbcad1cd"
+                            name: "fikar"
+                            email: "fikar@gmail.com"
+                            phone: "67890"
+                            familyName: "fikarfamily"
+                            title: "Mr"
+                            dateofbirth: null
+                            citizenship: null
+                            ktppaspor: null
+                            issuingcountry: null
+                            expirationdatepass: null
+                            createdAt: "2023-06-22T15:47:31.588Z"
+                            updatedAt: "2023-06-22T15:47:31.588Z"
+                          - id: "d353c788-3891-45d2-9f9d-be1ee74509a9"
+                            checkoutsId: "03bb8d98-213e-4077-abf5-4332c1bfa2be"
+                            ticketsId: "e051939f-6378-4514-abf3-63c79ca8f85f"
+                            name: "mata"
+                            email: "mata@gmail.com"
+                            phone: "12345"
+                            familyName: "matafamily"
+                            title: "Mr"
+                            dateofbirth: null
+                            citizenship: null
+                            ktppaspor: null
+                            issuingcountry: null
+                            expirationdatepass: null
+                            createdAt: "2023-06-22T15:47:31.588Z"
+                            updatedAt: "2023-06-22T15:47:31.588Z"
+  /payment:
+    post:
+      tags:
+        - Payment
+      summary: Add Payment With Token
+      parameters:
+        - name: token
+          in: path
+          schema:
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            encoding: {}
+            schema:
+              required:
+                - cardNumber
+                - cardHolderName
+                - cvc
+                - expiration
+              type: object
+              properties:
+                cardNumber:
+                  type: string
+                  example: 448000000000000
+                cardHolderName:
+                  type: string
+                  example: Jamal
+                cvc:
+                  type: number
+                  example: 123
+                expiration:
+                  type: string
+                  example: 07/04
+        required: false
+      responses:
+        "201":
+          description: If Created payment Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  message:
+                    type: string
+                    example: Created payment Success
+          headers: {}
+        "400":
+          description: If Token not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: Token not found
+
+          headers: {}
+      deprecated: false
+  /transaction:
+    get:
+      tags:
+        - Transaction
+      summary: Get Transaction With Token
+      parameters:
+        - name: token
+          in: path
+          schema:
+      responses:
+        "200":
+          description: If data successfully retrived
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  message:
+                    type: string
+                    example: Get All Data Transactions Success
+                  data:
+                    type: array
+                    items:
+                      type: object
+                    properties:
+
+                    example:
+                      - id: "03bb8d98-213e-4077-abf5-4332c1bfa2be"
+                        usersId: "59c414a7-e3e2-4005-afcd-7982e224e540"
+                        departureTicketsId: "a30c37d1-7700-40bb-ba37-c218a4cc17de"
+                        returnTicketsId: "86da83ae-3e0a-4d8d-baf1-ca49cbcad1cd"
+                        total_passenger: 2
+                        createdAt: "2023-06-14T15:29:28.482Z"
+                        updatedAt: "2023-06-14T15:29:28.482Z"
+                        departureTicket:
+                          id: "a30c37d1-7700-40bb-ba37-c218a4cc17de"
+                          city_from: "Jakarta"
+                          city_to: "Medan"
+                          airlines: "Super Air Jet"
+                          code: "IU-454"
+                          airport_from: "Soekarno-Hatta International"
+                          airport_to: "Bandar Udara Internasional Kualanamu"
+                          information: "Baggage 20 kg Cabin baggage 7 kg In Flight Entertainment"
+                          dateTakeoff: "06:45"
+                          dateLanding: "09:05"
+                          dateDeparture: "2023-06-20"
+                          dateEnd: "2023-06-20"
+                          dateReturn: "2023-06-21"
+                          type_seat: "Economy"
+                          price: 891800
+                          booking_code: "ptzc5c9ala"
+                          available: true,
+                          createdAt: "2023-06-22T15:45:51.601Z"
+                          updatedAt: "2023-06-22T15:45:51.601Z"
+                        returnTicket:
+                          id: "86da83ae-3e0a-4d8d-baf1-ca49cbcad1cd"
+                          city_from: "Medan"
+                          city_to: "Jakarta"
+                          airlines: "Super Air Jet"
+                          code: "IU-454"
+                          airport_from: "Soekarno-Hatta International"
+                          airport_to: "Bandar Udara Internasional Kualanamu"
+                          information: "Baggage 20 kg Cabin baggage 7 kg In Flight Entertainment"
+                          dateTakeoff: "06:45"
+                          dateLanding: "09:05"
+                          dateDeparture: "2023-06-20"
+                          dateEnd: "2023-06-20"
+                          dateReturn: "2023-06-21"
+                          type_seat: "Economy"
+                          price: 891800
+                          booking_code: "ptzc5c9ala"
+                          available: true,
+                          createdAt: "2023-06-22T15:45:51.601Z"
+                          updatedAt: "2023-06-22T15:45:51.601Z"
+                        total_price: 5539940
+                        passengers:
+                          - id: "8cc64a65-b234-4745-bb60-925aba9c95ca"
+                            checkoutsId: "03bb8d98-213e-4077-abf5-4332c1bfa2be"
+                            departureTicketsId: "a30c37d1-7700-40bb-ba37-c218a4cc17de"
+                            returnTicketsId: "86da83ae-3e0a-4d8d-baf1-ca49cbcad1cd"
+                            name: "fikar"
+                            email: "fikar@gmail.com"
+                            phone: "67890"
+                            familyName: "fikarfamily"
+                            title: "Mr"
+                            dateofbirth: null
+                            citizenship: null
+                            ktppaspor: null
+                            issuingcountry: null
+                            expirationdatepass: null
+                            createdAt: "2023-06-22T15:47:31.588Z"
+                            updatedAt: "2023-06-22T15:47:31.588Z"
+                          - id: "d353c788-3891-45d2-9f9d-be1ee74509a9"
+                            checkoutsId: "03bb8d98-213e-4077-abf5-4332c1bfa2be"
+                            ticketsId: "e051939f-6378-4514-abf3-63c79ca8f85f"
+                            name: "mata"
+                            email: "mata@gmail.com"
+                            phone: "12345"
+                            familyName: "matafamily"
+                            title: "Mr"
+                            dateofbirth: null
+                            citizenship: null
+                            ktppaspor: null
+                            issuingcountry: null
+                            expirationdatepass: null
+                            createdAt: "2023-06-22T15:47:31.588Z"
+                            updatedAt: "2023-06-22T15:47:31.588Z"
+        "500":
+          description: If the server is down or error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Server Error
+  /notif:
+    get:
+      tags:
+        - Notification
+      summary: Get Notif With Token
+      parameters:
+        - name: token
+          in: path
+          schema:
+      responses:
+        "200":
+          description: If data successfully retrived
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  message:
+                    type: string
+                    example: Notification Data Retrieved Successfully
+                  data:
+                    type: array
+                    items:
+                      type: object
+                    properties:
+                    example:
+                      - id: "03bb8d98-213e-4077-abf5-4332c1bfa2be"
+                        usersId: "59c414a7-e3e2-4005-afcd-7982e224e540"
+                        message: "Pembayaran Ticket Berhasil! Selamat Menikmati Perjalanan Anda"
+                        read: false
+                        createdAt: "2023-06-14T15:29:28.482Z"
+                        updatedAt: "2023-06-14T15:29:28.482Z"
+      deprecated: false
+  /destfavorite:
+    get:
+      tags:
+        - Destination Favorite
+      summary: Get All Destination Favorite
+      parameters: []
+      responses:
+        "201":
+          description: If data successfully retrived
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Get All Data Destinasi Favorit Success
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: uuid
+                        image:
+                          type: string
+                        continent:
+                          type: string
+                        city_from:
+                          type: string
+                        city_to:
+                          type: string
+                        airlines:
+                          type: string
+                        date:
+                          type: string
+                        price:
+                          type: integer
+                        createdAt:
+                          type: string
+                        updatedAt:
+                          type: string
+                    example:
+                      - id: 1
+                        continent: Asia
+                        city_from: Sydney
+                        city_to: "Tokyo"
+                        airlines: "Jet Air"
+                        date: 27 - 30 Agustus 2023
+                        price: 400000
+                        image_profile: https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png
+                        createdAt: "2023-06-10T16:50:02.127Z"
+                        updatedAt: "2023-06-10T16:50:02.127Z"
+        "404":
+          description: If Data Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Data not found
+        "500":
+          description: If the server is down or full
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Server Error
+      deprecated: false
+
+  /destfavorite/:id:
+    get:
+      tags:
+        - Destination Favorite
+      summary: Get Destination Favorite By Id
+      parameters: []
+      responses:
+        "200":
+          description: If data successfully retrived
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Get Data Destinasi Successfully
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: uuid
+                        image:
+                          type: string
+                        continent:
+                          type: string
+                        city_from:
+                          type: string
+                        city_to:
+                          type: string
+                        airlines:
+                          type: string
+                        date:
+                          type: string
+                        price:
+                          type: integer
+                        createdAt:
+                          type: string
+                        updatedAt:
+                          type: string
+                    example:
+                      - id: 1
+                        continent: Asia
+                        city_from: Sydney
+                        city_to: "Tokyo"
+                        airlines: "Jet Air"
+                        date: 27 - 30 Agustus 2023
+                        price: 400000
+                        image_profile: https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png
+                        createdAt: "2023-06-10T16:50:02.127Z"
+                        updatedAt: "2023-06-10T16:50:02.127Z"
+        "404":
+          description: If Data Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Data not found
+        "500":
+          description: If the server is down or full
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Server Error
+      deprecated: false
+  /destfavorite?continent=eropa:
+    get:
+      tags:
+        - Destination Favorite
+      summary: Get Destination Favorite By query
+      parameters: []
+      responses:
+        "200":
+          description: If data successfully retrived
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: OK
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: uuid
+                        image_destinasi:
+                          type: string
+                        continent:
+                          type: string
+                        city_from:
+                          type: string
+                        city_to:
+                          type: string
+                        airlines:
+                          type: string
+                        date:
+                          type: string
+                        price:
+                          type: integer
+                        createdAt:
+                          type: string
+                        updatedAt:
+                          type: string
+                    example:
+                      - id: 1
+                        image_destinasi: https://res.klook.com/image/upload/Mobile/City/swox6wjsl5ndvkv5jvum.jpg
+                        continent: Eropa
+                        city_from: Jakarta
+                        city_to: Paris
+                        airlines: "Qatar Airways"
+                        date: 10 - 15 Agustus
+                        price: 7478200
+                        createdAt: "2023-06-12T14:36:42.689Z"
+                        updatedAt: "2023-06-12T14:36:42.689Z"
+        "404":
+          description: If Data Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Data Not Found
+      deprecated: false
+  /destfavorite?continent=asia:
+    get:
+      tags:
+        - Destination Favorite
+      summary: Get Destination Favorite By Query
+      parameters: []
+      responses:
+        "200":
+          description: If data successfully retrived
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: OK
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: uuid
+                        image_destinasi:
+                          type: string
+                        continent:
+                          type: string
+                        city_from:
+                          type: string
+                        city_to:
+                          type: string
+                        airlines:
+                          type: string
+                        date:
+                          type: string
+                        price:
+                          type: integer
+                        createdAt:
+                          type: string
+                        updatedAt:
+                          type: string
+                    example:
+                      - id: 1
+                        image_profile: https://fullsuitcase.com/wp-content/uploads/2022/06/Best-areas-to-stay-in-Bangkok-neighborhood-guide.jpg.webp
+                        continent: Eropa
+                        city_from: Jakarta
+                        city_to: Bangkok
+                        airlines: "AirAsia"
+                        date: 01 - 10 Juli
+                        price: 950000
+                        createdAt: "2023-06-12T14:36:42.689Z"
+                        updatedAt: "2023-06-12T14:36:42.689Z"
+        "404":
+          description: If Data Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Data not Found
+
+      deprecated: false
+definitions:
+  Tickettwoway:
+    type: object
+    required:
+    properties:
+      departureTicketsId:
+        type: string
+        example: 7d359d13-a5a3-427e-b977-2bc6183ac730
+      returnTicketsId:
+        type: string
+        example: 86da83ae-3e0a-4d8d-baf1-ca49cbcad1cd
+      passenger:
+        type: array
+        xml:
+          wrapped: true
+        items:
+          xml:
+            name: tag
+          anyOf:
+            - $ref: "#/definitions/Tag"
+            - $ref: "#/definitions/Tag1"
+      total_passenger:
+        type: number
+        example: 2
+    xml:
+      name: Pet
+  Tag:
+    type: object
+    properties:
+      name:
+        type: string
+        example: teuku
+      email:
+        type: string
+        example: teukudr@gmail.com
+      phone:
+        type: number
+        example: "12345"
+      familyName:
+        type: string
+        example: teukufamily
+      title:
+        type: string
+        example: Mr
+      dateofbirth:
+        type: boolean
+        example: "2023-12-11"
+      citizenship:
+        type: string
+        example: INDONESIA
+      ktppaspor:
+        type: string
+        example: "12121213"
+      issuingcountry:
+        type: string
+        example: INDONESIA
+      expirationdatepass:
+        type: number
+        example: 24/12
+    xml:
+      name: Tag
+  Tag1:
+    type: object
+    properties:
+      name:
+        type: string
+        example: hapizd
+      email:
+        type: string
+        example: hapizdasari@gmail.com
+      phone:
+        type: number
+        example: "12345"
+      familyName:
+        type: string
+        example: hapizdfamily
+      title:
+        type: string
+        example: Mr
+      dateofbirth:
+        type: number
+        example: "2023-12-11"
+      citizenship:
+        type: string
+        example: INDONESIA
+      ktppaspor:
+        type: string
+        example: "12121213"
+      issuingcountry:
+        type: string
+        example: INDONESIA
+      expirationdatepass:
+        type: number
+        example: 24/12
+    xml:
+      name: Tag
+  Ticketoneway:
+    type: object
+    required:
+    properties:
+      departureTicketsId:
+        type: string
+        example: 7d359d13-a5a3-427e-b977-2bc6183ac730
+      passenger:
+        type: array
+        xml:
+          wrapped: true
+        items:
+          xml:
+            name: tag
+          anyOf:
+            - $ref: "#/definitions/oneway"
+            - $ref: "#/definitions/oneway1"
+      total_passenger:
+        type: number
+        example: 2
+    xml:
+      name: Pet
+  oneway:
+    type: object
+    properties:
+      name:
+        type: string
+        example: teuku
+      email:
+        type: string
+        example: teukudr@gmail.com
+      phone:
+        type: number
+        example: "12345"
+      familyName:
+        type: string
+        example: teukufamily
+      title:
+        type: string
+        example: Mr
+      dateofbirth:
+        type: boolean
+        example: "2023-12-11"
+      citizenship:
+        type: string
+        example: INDONESIA
+      ktppaspor:
+        type: string
+        example: "12121213"
+      issuingcountry:
+        type: string
+        example: INDONESIA
+      expirationdatepass:
+        type: number
+        example: 24/12
+    xml:
+      name: Tag
+  oneway1:
+    type: object
+    properties:
+      name:
+        type: string
+        example: hapizd
+      email:
+        type: string
+        example: hapizdasari@gmail.com
+      phone:
+        type: number
+        example: "12345"
+      familyName:
+        type: string
+        example: hapizdfamily
+      title:
+        type: string
+        example: Mr
+      dateofbirth:
+        type: number
+        example: "2023-12-11"
+      citizenship:
+        type: string
+        example: INDONESIA
+      ktppaspor:
+        type: string
+        example: "12121213"
+      issuingcountry:
+        type: string
+        example: INDONESIA
+      expirationdatepass:
+        type: number
+        example: 24/12
+    xml:
+      name: oneway1
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io

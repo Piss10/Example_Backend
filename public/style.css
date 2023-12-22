@@ -1,0 +1,100 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+body {
+  min-height: 100vh;
+}
+.container {
+  position: relative;
+  max-width: 370px;
+  width: 100%;
+  padding: 25px;
+  border-radius: 8px;
+}
+.container header {
+  font-size: 22px;
+  font-weight: 600;
+  color: #333;
+}
+
+form .input-field {
+  position: relative;
+  height: 55px;
+  width: 100%;
+}
+.input-field input {
+  height: 100%;
+  width: 100%;
+  padding: 0 15px;
+}
+
+.input-field .show-hide {
+  position: absolute;
+  right: -50px;
+  top: 45%;
+  transform: translateY(-50%);
+  font-size: 22px;
+  color: #919191;
+  cursor: pointer;
+  padding: 3px;
+}
+
+.field .error {
+  display: flex;
+  align-items: center;
+  margin-top: 6px;
+  color: #d93025;
+  font-size: 13px;
+  display: none;
+}
+
+.error .error-icon {
+  margin-right: 6px;
+  font-size: 15px;
+}
+.create-password .error {
+  align-items: flex-start;
+}
+.create-password .error-icon {
+  margin-top: 4px;
+}
+.button {
+  margin: 25px 0 6px;
+}
+.button input {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 400;
+  background-color: #7126b5;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.button input:hover {
+  background-color: #7126b5;
+}
+
+.parent-alert {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  /* background-color: beige; */
+}
+
+.alert-success {
+  width: 273px;
+  height: 52px;
+  text-align: center;
+  background-color: #73ca5c;
+  border-radius: 12px;
+  margin-top: 50px;
+  margin-right: 10px;
+}
+
+.alert-success p {
+  color: white;
+  line-height: 52px;
+}
